@@ -1,0 +1,11 @@
+{
+  "brand": "Pipely",
+  "aliases": ["Pipely CRM"],
+  "competitors": ["HubSpot", "Pipedrive", "Attio", "Folk"],
+  "platforms": ["mock-gpt", "mock-claude"],
+  "prompts": [
+    {"text": "What's the best CRM for a 5-person agency?", "intent": "category"},
+    {"text": "Pipedrive alternatives that are cheaper", "intent": "competitor"},
+    {"text": "Is Pipely any good?", "intent": "brand"}
+  ]
+}
