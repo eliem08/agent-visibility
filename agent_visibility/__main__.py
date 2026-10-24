@@ -8,10 +8,14 @@ from .core import MockPlatform, Project, alerts, load_history, metrics, run
 
 def _print(m, brand):
     o = m["overall"]
-    print(f"{brand}: mentioned in {o['mention_rate']:.0%} of answers, share of voice {o['share_of_voice']:.0%}, "
-          f"avg rank {o['avg_rank']}, top-3 {o['top3_rate']:.0%}, sentiment {o['sentiment']:+.2f}")
+    print(
+        f"{brand}: mentioned in {o['mention_rate']:.0%} of answers, share of voice {o['share_of_voice']:.0%}, "
+        f"avg rank {o['avg_rank']}, top-3 {o['top3_rate']:.0%}, sentiment {o['sentiment']:+.2f}"
+    )
     for plat, pm in m["by_platform"].items():
-        print(f"  {plat:<14} mention {pm['mention_rate']:.0%}  SoV {pm['share_of_voice']:.0%}  rank {pm['avg_rank']}  top3 {pm['top3_rate']:.0%}")
+        print(
+            f"  {plat:<14} mention {pm['mention_rate']:.0%}  SoV {pm['share_of_voice']:.0%}  rank {pm['avg_rank']}  top3 {pm['top3_rate']:.0%}"
+        )
     print("  top cited: " + ", ".join(f"{d} ({n})" for d, n in o["top_citations"]))
 
 

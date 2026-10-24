@@ -1,5 +1,7 @@
 # agent-visibility
 
+[![CI](https://github.com/eliem08/agent-visibility/actions/workflows/ci.yml/badge.svg)](https://github.com/eliem08/agent-visibility/actions/workflows/ci.yml)
+
 > **SEMrush for personal agent platforms** — track how agents recommend your brand.
 
 SEO tracked your rank on Google. Now customers ask ChatGPT, Claude,
@@ -36,3 +38,26 @@ agent-visibility report history.jsonl
 - Real adapters (OpenAI, Anthropic, Perplexity, Gemini APIs; browser capture for consumer apps)
 - Prompt discovery: generate the buyer questions people actually ask, by persona
 - "Why not us?" analysis: which sources the agents cite, and content gaps to fill
+
+## Development
+
+Zero runtime dependencies; Python 3.10+.
+
+```bash
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -e ".[dev]"
+python -m unittest discover -s tests -t .           # unit + CLI smoke tests
+ruff check . && ruff format --check .               # lint + format
+```
+
+```
+agent_visibility/core.py       domain logic (pure, importable, fully tested)
+agent_visibility/__main__.py   CLI (`agent-visibility ...` / `python -m agent_visibility ...`)
+tests/                unit tests + generated CLI smoke tests
+examples/             sample inputs used by the docs and smoke tests
+```
+
+CI runs lint and tests on Ubuntu and Windows across Python 3.10, 3.12 and 3.13.
+Design, data model, trade-offs and production path: **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+
+Part of the [agent-economy](https://github.com/eliem08/agent-economy) portfolio (idea #38).

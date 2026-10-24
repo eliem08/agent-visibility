@@ -1,17 +1,43 @@
 """Track brand visibility in AI agent answers: parsing, metrics, history and alerts."""
+
 from __future__ import annotations
 
 import hashlib
 import json
 import re
 from collections import Counter, defaultdict
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 
 __all__ = ["Platform", "MockPlatform", "Project", "parse_answer", "run", "metrics", "alerts", "load_history"]
 
-POSITIVE = {"best", "great", "excellent", "recommend", "love", "easy", "affordable", "powerful", "intuitive", "top", "solid", "fast"}
-NEGATIVE = {"expensive", "clunky", "slow", "limited", "buggy", "avoid", "poor", "complicated", "outdated", "lacks", "worse"}
+POSITIVE = {
+    "best",
+    "great",
+    "excellent",
+    "recommend",
+    "love",
+    "easy",
+    "affordable",
+    "powerful",
+    "intuitive",
+    "top",
+    "solid",
+    "fast",
+}
+NEGATIVE = {
+    "expensive",
+    "clunky",
+    "slow",
+    "limited",
+    "buggy",
+    "avoid",
+    "poor",
+    "complicated",
+    "outdated",
+    "lacks",
+    "worse",
+}
 URL_RE = re.compile(r"https?://([^/\s)\]]+)")
 
 
@@ -34,7 +60,12 @@ class MockPlatform(Platform):
         k = 3 + seed % 2
         lines = [f"Here are good options for: {prompt}"]
         for i, b in enumerate(order[:k], 1):
-            adj = ["is a great, intuitive pick", "is powerful but can be expensive", "is affordable and easy to set up", "is solid for small teams"][(seed >> i) % 4]
+            adj = [
+                "is a great, intuitive pick",
+                "is powerful but can be expensive",
+                "is affordable and easy to set up",
+                "is solid for small teams",
+            ][(seed >> i) % 4]
             lines.append(f"{i}. **{b}** {adj}. See https://{b.lower().replace(' ', '')}.com/pricing")
         lines.append("Sources: https://www.g2.com/categories/crm https://www.reddit.com/r/smallbusiness")
         return "\n".join(lines)
@@ -77,7 +108,7 @@ def parse_answer(answer: str, entities: dict[str, list[str]]) -> dict:
             continue
         first_pos[ent] = pos
         rank = next((i for i, l in enumerate(list_items, 1) if _find(l, names) >= 0), None)
-        window = answer[max(0, pos - 80): pos + 160].lower()
+        window = answer[max(0, pos - 80) : pos + 160].lower()
         words = re.findall(r"[a-z]+", window)
         sentiment = sum(w in POSITIVE for w in words) - sum(w in NEGATIVE for w in words)
         out[ent] = {"mentioned": True, "rank": rank, "sentiment": max(-1, min(1, sentiment))}
@@ -110,12 +141,16 @@ def metrics(rows: list[dict], brand: str) -> dict:
         ranks = [x["rank"] for x in mentioned if x["rank"]]
         total_mentions = sum(1 for r in rs for e in r["entities"].values() if e["mentioned"])
         cites = Counter(c for r in rs for c in r["citations"])
-        return {"answers": n, "mention_rate": round(len(mentioned) / n, 3),
-                "share_of_voice": round(len(mentioned) / total_mentions, 3) if total_mentions else 0.0,
-                "avg_rank": round(sum(ranks) / len(ranks), 2) if ranks else None,
-                "top3_rate": round(sum(1 for r in ranks if r <= 3) / n, 3),
-                "sentiment": round(sum(x["sentiment"] for x in mentioned) / len(mentioned), 2) if mentioned else 0.0,
-                "top_citations": cites.most_common(5)}
+        return {
+            "answers": n,
+            "mention_rate": round(len(mentioned) / n, 3),
+            "share_of_voice": round(len(mentioned) / total_mentions, 3) if total_mentions else 0.0,
+            "avg_rank": round(sum(ranks) / len(ranks), 2) if ranks else None,
+            "top3_rate": round(sum(1 for r in ranks if r <= 3) / n, 3),
+            "sentiment": round(sum(x["sentiment"] for x in mentioned) / len(mentioned), 2) if mentioned else 0.0,
+            "top_citations": cites.most_common(5),
+        }
+
     by_platform = defaultdict(list)
     for r in rows:
         by_platform[r["platform"]].append(r)
