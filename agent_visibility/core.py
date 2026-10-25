@@ -81,7 +81,7 @@ class Project:
 
     @classmethod
     def load(cls, path):
-        with open(path, encoding="utf-8") as fh:
+        with open(path, encoding="utf-8-sig") as fh:
             return cls(**json.load(fh))
 
     def names(self) -> dict[str, list[str]]:
@@ -174,7 +174,7 @@ def alerts(prev: dict, cur: dict, sov_drop: float = 0.05) -> list[str]:
 
 def load_history(path: str) -> dict[str, list[dict]]:
     runs = defaultdict(list)
-    with open(path, encoding="utf-8") as fh:
+    with open(path, encoding="utf-8-sig") as fh:
         for line in fh:
             if line.strip():
                 r = json.loads(line)
