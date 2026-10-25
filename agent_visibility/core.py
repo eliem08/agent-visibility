@@ -82,7 +82,13 @@ class Project:
     @classmethod
     def load(cls, path):
         with open(path, encoding="utf-8-sig") as fh:
-            return cls(**json.load(fh))
+            doc = json.load(fh)
+        if not isinstance(doc, dict):
+            raise ValueError(f"{path}: expected a JSON project object")
+        unknown = set(doc) - set(cls.__dataclass_fields__)
+        if unknown:
+            raise ValueError(f"{path}: unknown project fields {sorted(unknown)}")
+        return cls(**doc)
 
     def names(self) -> dict[str, list[str]]:
         return {self.brand: [self.brand, *self.aliases], **{c: [c] for c in self.competitors}}
@@ -178,5 +184,7 @@ def load_history(path: str) -> dict[str, list[dict]]:
         for line in fh:
             if line.strip():
                 r = json.loads(line)
+                if not isinstance(r, dict):
+                    raise ValueError(f"{path}: expected one JSON object per line")
                 runs[r["ts"]].append(r)
     return dict(sorted(runs.items()))
