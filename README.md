@@ -47,7 +47,7 @@ Every plan starts with a 14-day free trial. Prices in USD, billed monthly unless
 | **Growth** | $249 per month | 5 brands; 500 prompts; Competitor tracking |
 | **Agency** | $799 per month | Unlimited brands; White-label reports; Priority support |
 
-To start a trial or buy a plan, email **sales@YOUR-DOMAIN.com**.
+To start a trial or buy a plan, [request access](https://github.com/eliem08/agent-visibility/issues/new?title=Agent%20Visibility%20trial&labels=sales).
 
 ## Licence
 
