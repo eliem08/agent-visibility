@@ -1,0 +1,24 @@
+[
+ {
+  "op": "run",
+  "payload": {
+   "project": {
+    "name": "project.json",
+    "content": "{\n  \"brand\": \"Pipely\",\n  \"aliases\": [\"Pipely CRM\"],\n  \"competitors\": [\"HubSpot\", \"Pipedrive\", \"Attio\", \"Folk\"],\n  \"platforms\": [\"mock-gpt\", \"mock-claude\"],\n  \"prompts\": [\n    {\"text\": \"What's the best CRM for a 5-person agency?\", \"intent\": \"category\"},\n    {\"text\": \"Pipedrive alternatives that are cheaper\", \"intent\": \"competitor\"},\n    {\"text\": \"Is Pipely any good?\", \"intent\": \"brand\"}\n  ]\n}\n"
+   }
+  }
+ },
+ {
+  "op": "run",
+  "payload": {
+   "project": {
+    "name": "project.json",
+    "content": "{\n  \"brand\": \"Pipely\",\n  \"aliases\": [\"Pipely CRM\"],\n  \"competitors\": [\"HubSpot\", \"Pipedrive\", \"Attio\", \"Folk\"],\n  \"platforms\": [\"mock-gpt\", \"mock-claude\"],\n  \"prompts\": [\n    {\"text\": \"What's the best CRM for a 5-person agency?\", \"intent\": \"category\"},\n    {\"text\": \"Pipedrive alternatives that are cheaper\", \"intent\": \"competitor\"},\n    {\"text\": \"Is Pipely any good?\", \"intent\": \"brand\"}\n  ]\n}\n"
+   }
+  }
+ },
+ {
+  "op": "report",
+  "payload": {}
+ }
+]

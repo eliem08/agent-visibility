@@ -20,7 +20,7 @@ def _print(m, brand):
     print("  top cited: " + ", ".join(f"{d} ({n})" for d, n in o["top_citations"]))
 
 
-def _run(argv=None):
+def build_parser():
     ap = argparse.ArgumentParser(prog="agent-visibility")
     sub = ap.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run")
@@ -29,6 +29,11 @@ def _run(argv=None):
     rep = sub.add_parser("report")
     rep.add_argument("history")
     rep.add_argument("--brand")
+    return ap
+
+
+def _run(argv=None):
+    ap = build_parser()
     a = ap.parse_args(argv)
     if a.cmd == "run":
         proj = Project.load(a.project)

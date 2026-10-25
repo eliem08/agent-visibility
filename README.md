@@ -22,6 +22,18 @@ agent-visibility run examples/project.json --history h.jsonl
 agent-visibility report h.jsonl
 ```
 
+## Web app and API
+
+Every command is also a JSON API endpoint and a browser form, served by the built-in web app.
+
+```bash
+agent-visibility-web --port 8000          # then open http://127.0.0.1:8000
+docker build -t agent-visibility . && docker run -p 8000:8000 -v agent-visibility-data:/data agent-visibility
+```
+
+Endpoints: `POST /api/run`, `POST /api/report`, plus `GET /healthz` and `GET /api/spec` (machine-readable field list).
+Files are sent as `{"name": ..., "content": ...}`, folders as `{"files": [...]}` or a base64 zip.
+
 ## Pricing
 
 Every plan starts with a 14-day free trial. Prices in USD, billed monthly unless noted.
