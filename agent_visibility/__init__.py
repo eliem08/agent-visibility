@@ -1,4 +1,4 @@
-"""SEMrush for personal agent platforms: track how agents recommend your brand."""
+"""Agent Visibility: Track how AI assistants recommend your brand."""
 
 from .core import *
 

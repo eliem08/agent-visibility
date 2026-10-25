@@ -1,16 +1,45 @@
-# agent-visibility
+<!-- sell-kit:start -->
+# Agent Visibility
 
 [![CI](https://github.com/eliem08/agent-visibility/actions/workflows/ci.yml/badge.svg)](https://github.com/eliem08/agent-visibility/actions/workflows/ci.yml)
 
-> **SEMrush for personal agent platforms** — track how agents recommend your brand.
+> **Track how AI assistants recommend your brand.**
 
-SEO tracked your rank on Google. Now customers ask ChatGPT, Claude,
-Perplexity, Gemini and personal agent platforms "what's the best CRM for a
-5-person agency?". If you're not in the answer, you don't exist.
-`agent-visibility` runs your buyer prompts across platforms on a schedule
-and tracks share of voice, rank, sentiment and cited sources over time.
+**Who it's for:** Marketing and SEO teams as search moves to AI assistants.
 
-## What the MVP does
+**The problem:** Buyers now ask assistants what to buy, and brands have no idea whether they are mentioned, ranked or dismissed.
+
+**What you get:** Measure share of voice, rank, sentiment and citations for your brand across assistants and prompts, tracked over time.
+
+## Quickstart
+
+Customers receive a release archive with the wheel and the examples. Python 3.10+ and no other dependencies.
+
+```bash
+pip install agent_visibility-0.1.0-py3-none-any.whl
+agent-visibility run examples/project.json --history h.jsonl
+agent-visibility run examples/project.json --history h.jsonl
+agent-visibility report h.jsonl
+```
+
+## Pricing
+
+Every plan starts with a 14-day free trial. Prices in USD, billed monthly unless noted.
+
+| Plan | Price | Includes |
+|---|---|---|
+| **Starter** | $49 per month | 1 brand; 50 prompts; Weekly runs |
+| **Growth** | $249 per month | 5 brands; 500 prompts; Competitor tracking |
+| **Agency** | $799 per month | Unlimited brands; White-label reports; Priority support |
+
+To start a trial or buy a plan, email **sales@YOUR-DOMAIN.com**.
+
+## Licence
+
+Proprietary. Copyright (c) 2026 eliem08. All rights reserved. Use requires a paid plan or an active trial; see [LICENSE](LICENSE).
+<!-- sell-kit:end -->
+
+## What it does
 
 - **Project config**: brand + aliases, competitors, prompt set (with intent tags), platforms
 - **Platform adapters** behind one interface; ships with a deterministic `MockPlatform`
