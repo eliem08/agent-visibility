@@ -29,8 +29,10 @@ flowchart LR
 - **Word-boundary + alias matching** avoids "Pipelyx" counting as "Pipely".
 - **Store raw parsed rows, compute metrics on read.** Metric definitions can evolve and history is recomputed.
 
-## 5. Production architecture
-A scheduler (daily per project × platform × prompt; n samples per prompt to average out
+## 5. Future production architecture (not shipped)
+The following is the future production path, not the shipped MVP (which is file-backed,
+uses the deterministic MockPlatform, and runs manually via CLI or web form):
+a scheduler (daily per project × platform × prompt; n samples per prompt to average out
 stochastic answers), a worker pool with per-provider rate limits, Postgres or ClickHouse for runs,
 and a dashboard with trend charts and alert channels.
 

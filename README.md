@@ -48,20 +48,20 @@ To sell self-serve, set four variables and point a Stripe webhook at `https://<y
 |---|---|
 | `STRIPE_SECRET_KEY` | `sk_live_...` |
 | `STRIPE_WEBHOOK_SECRET` | `whsec_...` |
-| `STRIPE_PRICES` | `team=price_123,business=price_456` |
+| `STRIPE_PRICES` | `starter=price_123,growth=price_456,agency=price_789` |
 | `PUBLIC_URL` | `https://agent-visibility.example.com` |
 
-Buyers pick a plan on `/pricing`, pay on Stripe Checkout and see their API key once on the success page. Cancelling the subscription revokes the key. A selling server always requires a key.
+Buyers pick a plan on `/pricing`, pay on Stripe Checkout and see their API key once on the success page. Cancelling the subscription revokes the key. A selling server always requires a key. Copy `.env.example` to `.env` and fill in real values (never commit `.env`).
 
 ## Pricing
 
-Every plan starts with a 14-day free trial. Prices in USD, billed monthly unless noted.
+Every monthly plan starts with a 14-day free trial. Prices in USD, billed monthly unless noted. All plans unlock the same software in this release; brand and prompt counts are licence terms, not code-enforced limits, and higher tiers add licence scope and support, not gated features.
 
 | Plan | Price | Includes |
 |---|---|---|
-| **Starter** | $49 per month | 1 brand; 50 prompts; Weekly runs |
-| **Growth** | $249 per month | 5 brands; 500 prompts; Competitor tracking |
-| **Agency** | $799 per month | Unlimited brands; White-label reports; Priority support |
+| **Starter** | $49 per month | 1 brand; 50 prompts |
+| **Growth** | $249 per month | Everything in Starter |
+| **Agency** | $799 per month | Everything in Starter; Priority support |
 
 To start a trial or buy a plan, [request access](https://github.com/eliem08/agent-visibility/issues/new?title=Agent%20Visibility%20trial&labels=sales).
 
@@ -98,6 +98,7 @@ agent-visibility report history.jsonl
 - Real adapters (OpenAI, Anthropic, Perplexity, Gemini APIs; browser capture for consumer apps)
 - Prompt discovery: generate the buyer questions people actually ask, by persona
 - "Why not us?" analysis: which sources the agents cite, and content gaps to fill
+- Scheduled / weekly runs, white-label reports, and plan limits enforced in code (today: licence terms only, see Pricing)
 
 ## Development
 
