@@ -93,6 +93,22 @@ agent-visibility run examples/project.json --history history.jsonl
 agent-visibility report history.jsonl
 ```
 
+## Live answers and captured answers
+
+Two ways to measure real assistants instead of the built-in mock platforms:
+
+- **Claude, live.** Put `"claude"` in the project's `platforms` list. It needs the Anthropic SDK
+  (`pip install anthropic`) and credentials in the environment (`ANTHROPIC_API_KEY`). Each prompt is one
+  billed API call with no system prompt, so the answer is what a buyer would get. Set
+  `AGENT_VISIBILITY_CLAUDE_MODEL` to choose the model.
+- **Any other assistant, captured.** Save answers from ChatGPT, Perplexity, Gemini or Copilot as a JSON
+  list of `{"platform", "prompt", "answer"}` and score them with the same parser:
+
+```bash
+agent-visibility import-answers examples/project.json examples/captured-answers.json --history history.jsonl
+agent-visibility report history.jsonl
+```
+
 ## Roadmap
 
 - Real adapters (OpenAI, Anthropic, Perplexity, Gemini APIs; browser capture for consumer apps)

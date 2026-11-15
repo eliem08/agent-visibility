@@ -1,0 +1,12 @@
+[
+  {
+    "platform": "chatgpt",
+    "prompt": "What's the best CRM for a 5-person agency?",
+    "answer": "For a small agency I'd look at:\n1. **HubSpot** - powerful but can get expensive.\n2. **Pipely** - affordable and easy to set up.\n3. **Pipedrive** - solid for small teams.\nSources: https://www.g2.com/categories/crm"
+  },
+  {
+    "platform": "perplexity",
+    "prompt": "Pipedrive alternatives that are cheaper",
+    "answer": "Cheaper alternatives to Pipedrive include Folk and Attio. Both are easy to set up. See https://www.reddit.com/r/smallbusiness"
+  }
+]

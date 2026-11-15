@@ -4,7 +4,8 @@ import json
 import os
 import sys
 
-from .core import MockPlatform, Project, alerts, load_history, metrics, run
+from .core import Project, alerts, load_history, metrics, run
+from .live import import_answers, platform_for
 
 
 def _print(m, brand):
@@ -26,6 +27,10 @@ def build_parser():
     r = sub.add_parser("run")
     r.add_argument("project")
     r.add_argument("--history", default="history.jsonl")
+    imp = sub.add_parser("import-answers", help="score answers captured from any assistant (ChatGPT, Perplexity...)")
+    imp.add_argument("project")
+    imp.add_argument("answers", help="JSON list of {platform, prompt, answer}")
+    imp.add_argument("--history", default="history.jsonl")
     rep = sub.add_parser("report")
     rep.add_argument("history")
     rep.add_argument("--brand")
@@ -35,10 +40,13 @@ def build_parser():
 def _run(argv=None):
     ap = build_parser()
     a = ap.parse_args(argv)
-    if a.cmd == "run":
+    if a.cmd in ("run", "import-answers"):
         proj = Project.load(a.project)
         everyone = [proj.brand, *proj.competitors]
-        rows = run(proj, [MockPlatform(p, everyone) for p in proj.platforms])
+        if a.cmd == "run":
+            rows = run(proj, [platform_for(p, everyone) for p in proj.platforms])
+        else:
+            rows = import_answers(proj, a.answers)
         prev = None
         if os.path.exists(a.history):
             runs = load_history(a.history)

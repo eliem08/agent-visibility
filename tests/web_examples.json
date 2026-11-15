@@ -1,5 +1,18 @@
 [
  {
+  "op": "import-answers",
+  "payload": {
+   "project": {
+    "name": "project.json",
+    "content": "{\n  \"brand\": \"Pipely\",\n  \"aliases\": [\"Pipely CRM\"],\n  \"competitors\": [\"HubSpot\", \"Pipedrive\", \"Attio\", \"Folk\"],\n  \"platforms\": [\"mock-gpt\", \"mock-claude\"],\n  \"prompts\": [\n    {\"text\": \"What's the best CRM for a 5-person agency?\", \"intent\": \"category\"},\n    {\"text\": \"Pipedrive alternatives that are cheaper\", \"intent\": \"competitor\"},\n    {\"text\": \"Is Pipely any good?\", \"intent\": \"brand\"}\n  ]\n}\n"
+   },
+   "answers": {
+    "name": "captured-answers.json",
+    "content": "[\n  {\n    \"platform\": \"chatgpt\",\n    \"prompt\": \"What's the best CRM for a 5-person agency?\",\n    \"answer\": \"For a small agency I'd look at:\\n1. **HubSpot** - powerful but can get expensive.\\n2. **Pipely** - affordable and easy to set up.\\n3. **Pipedrive** - solid for small teams.\\nSources: https://www.g2.com/categories/crm\"\n  },\n  {\n    \"platform\": \"perplexity\",\n    \"prompt\": \"Pipedrive alternatives that are cheaper\",\n    \"answer\": \"Cheaper alternatives to Pipedrive include Folk and Attio. Both are easy to set up. See https://www.reddit.com/r/smallbusiness\"\n  }\n]\n"
+   }
+  }
+ },
+ {
   "op": "run",
   "payload": {
    "project": {
