@@ -46,7 +46,7 @@ class LiveTests(unittest.TestCase):
     def test_unknown_platforms_are_refused_with_a_way_forward(self):
         self.assertEqual(platform_for("mock-gpt", ["A"]).name, "mock-gpt")
         with self.assertRaises(LiveError) as ctx:
-            platform_for("chatgpt", ["A"])
+            platform_for("copilot", ["A"])
         self.assertIn("import-answers", str(ctx.exception))
 
     def test_imported_answers_are_scored_like_live_ones(self):

@@ -101,7 +101,17 @@ Two ways to measure real assistants instead of the built-in mock platforms:
   (`pip install anthropic`) and credentials in the environment (`ANTHROPIC_API_KEY`). Each prompt is one
   billed API call with no system prompt, so the answer is what a buyer would get. Set
   `AGENT_VISIBILITY_CLAUDE_MODEL` to choose the model.
-- **Any other assistant, captured.** Save answers from ChatGPT, Perplexity, Gemini or Copilot as a JSON
+- **OpenAI, Perplexity and Gemini, live.** Put `"openai"` (or `"chatgpt"`), `"perplexity"` or `"gemini"` in
+  `platforms`, with `OPENAI_API_KEY`, `PERPLEXITY_API_KEY` or `GEMINI_API_KEY` set. These adapters use only
+  the standard library.
+  - Models: `gpt-4o`, `sonar` and `gemini-2.5-flash` by default. Providers rename models often, so set
+    `AGENT_VISIBILITY_OPENAI_MODEL`, `AGENT_VISIBILITY_PERPLEXITY_MODEL` or `AGENT_VISIBILITY_GEMINI_MODEL`
+    to a current one.
+  - Perplexity's cited sources are counted as citations.
+  - The Gemini key is sent in a header, never in the URL.
+  - An API answer is close to, but not the same as, what the consumer app shows, because the apps add memory,
+    location and their own browsing.
+- **Any other assistant, captured.** Save answers from Copilot or the consumer apps themselves as a JSON
   list of `{"platform", "prompt", "answer"}` and score them with the same parser:
 
 ```bash
@@ -111,7 +121,7 @@ agent-visibility report history.jsonl
 
 ## Roadmap
 
-- Real adapters (OpenAI, Anthropic, Perplexity, Gemini APIs; browser capture for consumer apps)
+- Browser capture for the consumer apps (ChatGPT, Perplexity, Gemini, Copilot)
 - Prompt discovery: generate the buyer questions people actually ask, by persona
 - "Why not us?" analysis: which sources the agents cite, and content gaps to fill
 - Scheduled / weekly runs, white-label reports, and plan limits enforced in code (today: licence terms only, see Pricing)
